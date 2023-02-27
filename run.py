@@ -8,6 +8,7 @@ print(sys.path)
 from pseudorandom import Pseudorandom
 from atom import Atom
 from interaction import *
+from reaction import *
 
 friction = 1.0
 
@@ -27,14 +28,26 @@ print()
 a1.add_interaction(a2, null_force, null_energy, {})
 a1.add_interaction(a3, null_force, null_energy, {})
 
+a2.add_reaction([a3], null_condition, null_effect)
+
 print(a1.interactions)
 print(a2.interactions)
 print(a3.interactions)
 print()
 
+print(a1.reactions)
+print(a2.reactions)
+print(a3.reactions)
+print()
+1/0
+
 interactions = []
 for a in atoms:
 	[ interactions.append(i) for i in a.interactions if i not in interactions ]
+
+reactions = []
+for a in atoms:
+	[ reactions.append(r) for r in a.reactions if r not in reactions ]
 
 pointers = np.zeros((len(atoms), len(atoms), 3))
 distances = np.zeros((len(atoms), len(atoms)))
@@ -66,6 +79,9 @@ print(distances)
 for atom in atoms:
 	atom.deterministic_move(timestep)
 	atom.brownian_move(timestep, temperature, pseudorandom.draw())
+
+for reaction in reactions:
+	if reaction.condition_fulfilled(): reaction.effect()
 
 print(atoms)
 1/0
