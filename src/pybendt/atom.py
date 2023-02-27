@@ -28,10 +28,12 @@ class Atom():
 		self.reactions.append(reaction)
 		for atom in atoms:
 			atom.reactions.append(reaction)
+	def move(self, vector):
+		self.position += vector
 	def deterministic_move(self, timestep):
-		self.position += self.mobility * self.force
+		self.move(self.mobility * self.force)
 	def brownian_move(self, timestep, temperature, random_vector):
-		self.position += np.sqrt(2*Boltzmann*temperature*self.mobility) * random_vector
+		self.move(np.sqrt(2*Boltzmann*temperature*self.mobility) * random_vector)
 	def remove_interactions_by_id(self, ids):
 		for i in self.interactions:
 			if i.id in ids: i.remove()
