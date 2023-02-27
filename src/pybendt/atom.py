@@ -2,8 +2,8 @@ import itertools
 import numpy as np
 from scipy.constants import Boltzmann
 
-from interaction import Interaction
-from reaction import Reaction
+from pybendt.interaction import Interaction
+from pybendt.reaction import Reaction
 
 class Atom():
 	id_iter = itertools.count()
