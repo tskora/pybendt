@@ -2,8 +2,8 @@ import numpy as np
 import os
 import sys
 
-sys.path.append(os.path.abspath("./pybendt"))
-print(sys.path)
+# sys.path.append(os.path.abspath("./src/pybendt/"))
+# print(sys.path)
 
 from pseudorandom import Pseudorandom
 from atom import Atom
@@ -48,8 +48,6 @@ print(a2.reactions)
 print(a3.reactions)
 print()
 
-1/0
-
 
 interactions = []
 for a in atoms:
@@ -91,10 +89,11 @@ for atom in atoms:
 	atom.brownian_move(timestep, temperature, pseudorandom.draw())
 
 for reaction in reactions:
-	if reaction.condition_fulfilled(): reaction.effect()
+	if reaction.condition_fulfilled():
+		reaction.effect()
 
 print(atoms)
-1/0
+# 1/0
 
 # a1.remove_interactions_by_id([1])
 
@@ -108,12 +107,12 @@ print(atoms)
 # 	for atom in atoms:
 # 		a.compute_force(F)
 
-1/0
+# 1/0
 
-for i in range(1000):
-	compute_force(atoms)
-	compute_energy(atoms)
-	compute_random_force(atoms)
-	move(atoms)
-	if topology_change_condition_fulfilled(atoms):
-		topology_change(atoms)
+# for i in range(1000):
+# 	compute_force(atoms)
+# 	compute_energy(atoms)
+# 	compute_random_force(atoms)
+# 	move(atoms)
+	# if topology_change_condition_fulfilled(atoms):
+	# 	topology_change(atoms)
