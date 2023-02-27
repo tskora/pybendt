@@ -8,9 +8,9 @@ class Reaction():
 		self.condition_function = condition_function
 		self.effect_function = effect_function
 	def condition_fulfilled(self):
-		return self.condition_function()
+		return self.condition_function(self)
 	def effect(self):
-		self.end_simulation = self.effect_function()
+		self.end_simulation = self.effect_function(self)
 	def remove(self):
 		for atom in self.atoms:
 			atom.reactions = [ r for r in atom.reactions if r.id != self.id ]
@@ -22,7 +22,13 @@ class Reaction():
 		return self.__str__()
 
 def null_condition(reaction):
-	if reaction.atoms: False
+	if True:
+		print('condition not fulfilled!\n')
+		return False
+	else:
+		print('condition fulfilled!\n')
+		return True
 
 def null_effect(reaction):
-	self.end_simulation = False
+	print('simulation continues\n')
+	return False
