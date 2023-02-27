@@ -29,6 +29,7 @@ a1.add_interaction(a2, null_force, null_energy, {})
 a1.add_interaction(a3, null_force, null_energy, {})
 
 a2.add_reaction([a3], null_condition, null_effect)
+a3.add_reaction([a1, a2], null_condition, null_effect)
 
 print(a1.interactions)
 print(a2.interactions)
@@ -39,7 +40,16 @@ print(a1.reactions)
 print(a2.reactions)
 print(a3.reactions)
 print()
+
+a2.remove_reactions_by_id([2])
+
+print(a1.reactions)
+print(a2.reactions)
+print(a3.reactions)
+print()
+
 1/0
+
 
 interactions = []
 for a in atoms:

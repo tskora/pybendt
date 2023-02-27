@@ -13,7 +13,7 @@ class Reaction():
 		self.end_simulation = self.effect_function()
 	def remove(self):
 		for atom in self.atoms:
-			atom.reactions = [ r for r in self.atom.reactions if r.id != self.id ]
+			atom.reactions = [ r for r in atom.reactions if r.id != self.id ]
 		del self
 	def __str__(self):
 		atoms_string = ('{}-'*len(self.atoms)).format(*[a.id for a in self.atoms])[:-1]
