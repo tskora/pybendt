@@ -1,5 +1,8 @@
 import itertools
 import numpy as np
+from scipy.constants import Boltzmann, Avogadro
+
+kB_in_kcal_per_mole_per_kelvin = Boltzmann / 4184 * Avogadro
 
 class Interaction():
 	id_iter = itertools.count()
@@ -30,3 +33,9 @@ def null_energy(distance):
 
 def null_force(distance, pointer):
 	return np.zeros(3)
+
+def harmonic_energy(distance, force_constant, equilibrium_distance):
+	return force_constant * (distance - equilibrium_distance)**2
+
+def harmonic_force(distance, pointer, force_constant, equilibrium_distance):
+	return -force_constant * (1.0 - equilibrium_distance/distance) * pointer

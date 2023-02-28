@@ -26,14 +26,16 @@ $ pip3 install pybendt
 | Physical property | Units |
 |---|---|
 | Temperature | kelvin (*K*) |
-| Friction | kilocalorie per mole per angstrom squared (*kcal/mol/Å^2*) |
+| Friction coefficient | picosecond times kilocalorie per mole per angstrom squared (*ps kcal/mol/Å^2*) |
 | Time | picosecond (*ps*) |
 | Distance | angstrom (*Å*) |
-| Energy | kilocalorie per mol per angstrom (*kcal/mol/Å*) |
+| Energy | kilocalorie per mole (*kcal/mol*) |
+| Force | kilocalorie per mole per angstrom (*kcal/mol/Å*) |
+| Force constant | kilocalorie per mole per angstrom squared (*kcal/mol/Å^2*) |
 
 > **Note**
 > 
-> There is a separate function ``friction_from_temparature_hydrodynamic_radius_and_viscosity`` which takes temperature in kelvin (*K*), hydrodynamic radius in angstrom (*Å*) and viscosity in centipoise (*cP*).
+> There is a separate function ``friction_from_hydrodynamic_radius_and_viscosity`` which takes hydrodynamic radius in angstrom (*Å*) and viscosity in centipoise (*cP*) and returns friction coeffiient in picosecond times kilocalorie per mole per angstrom squared (*ps kcal/mol/Å^2*).
 
 ## Authors
 

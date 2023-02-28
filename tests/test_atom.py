@@ -6,6 +6,7 @@ import numpy as np
 import unittest
 
 from pybendt.atom import *
+from pybendt.interaction import kB_in_kcal_per_mole_per_kelvin
 
 class TestAtom(unittest.TestCase):
 	def setUp(self):
@@ -15,6 +16,9 @@ class TestAtom(unittest.TestCase):
 		translation_vector = np.zeros(3)
 		self.atom1.move(translation_vector)
 		self.assertSequenceEqual(self.initial_position, list(self.atom1.position))
+	def test_friction_conversion(self):
+		gamma = friction_from_hydrodynamic_radius_and_viscosity(hydradius = 51.0, viscosity = 1.0)
+		self.assertAlmostEqual(0.00420953, kB_in_kcal_per_mole_per_kelvin*293/gamma, places = 7)
 
 if __name__ == '__main__':	
 	unittest.main()

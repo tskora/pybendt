@@ -1,8 +1,7 @@
 import itertools
 import numpy as np
-from scipy.constants import Boltzmann
 
-from pybendt.interaction import Interaction
+from pybendt.interaction import Interaction, kB_in_kcal_per_mole_per_kelvin
 from pybendt.reaction import Reaction
 
 class Atom():
@@ -33,7 +32,7 @@ class Atom():
 	def deterministic_move(self, timestep):
 		self.move(self.mobility * self.force)
 	def brownian_move(self, timestep, temperature, random_vector):
-		self.move(np.sqrt(2*Boltzmann*temperature*self.mobility) * random_vector)
+		self.move(np.sqrt(2*kB_in_kcal_per_mole_per_kelvin*temperature*self.mobility) * random_vector)
 	def remove_interactions_by_id(self, ids):
 		for i in self.interactions:
 			if i.id in ids: i.remove()
@@ -42,3 +41,6 @@ class Atom():
 			if r.id in ids: r.remove()
 	def reset_force(self):
 		self.force = np.zeros(3)
+
+def friction_from_hydrodynamic_radius_and_viscosity(hydradius, viscosity):
+	return 6 * np.pi * viscosity * hydradius * 6.02 / 41.84
