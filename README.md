@@ -36,4 +36,4 @@ $ pip3 install pybendt
 
 The following people contributed to the development of pybendt.
 
-- Tomasz Skóra -- **creator, lead developer** (contact: tskora@ichf.edu.pl)
+- Tomasz Skóra -- **creator, lead developer** (contact: tskora@sci.utah.edu)
