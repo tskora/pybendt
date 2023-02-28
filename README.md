@@ -1,8 +1,10 @@
 # pybendt
 Brownian Elastic Networks with Dynamic Topology.
+
 Copyright &copy;2023- Tomasz Skóra [tskora@sci.utah.edu](mailto:tskora@sci.utah.edu)
 
 > **Warning**
+> 
 > The software is not extensively tested yet! It's just a prototype!
 
 ## Features
@@ -30,6 +32,7 @@ $ pip3 install pybendt
 | Energy | kilocalorie per mol per angstrom (*kcal/mol/Å*) |
 
 > **Note**
+> 
 > There is a separate function ``friction_from_temparature_hydrodynamic_radius_and_viscosity`` which takes temperature in kelvin (*K*), hydrodynamic radius in angstrom (*Å*) and viscosity in centipoise (*cP*).
 
 ## Authors
