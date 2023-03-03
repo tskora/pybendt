@@ -35,7 +35,7 @@ def null_force(distance, pointer):
 	return np.zeros(3)
 
 def harmonic_energy(distance, force_constant, equilibrium_distance):
-	return force_constant * (distance - equilibrium_distance)**2
+	return 0.5 * force_constant * (distance - equilibrium_distance)**2
 
 def harmonic_force(distance, pointer, force_constant, equilibrium_distance):
-	return -force_constant * (1.0 - equilibrium_distance/distance) * pointer
+	return force_constant * (1.0 - equilibrium_distance/distance) * pointer

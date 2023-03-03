@@ -30,9 +30,9 @@ class Atom():
 	def move(self, vector):
 		self.position += vector
 	def deterministic_move(self, timestep):
-		self.move(self.mobility * self.force)
+		self.move(self.mobility * self.force * timestep)
 	def brownian_move(self, timestep, temperature, random_vector):
-		self.move(np.sqrt(2*kB_in_kcal_per_mole_per_kelvin*temperature*self.mobility) * random_vector)
+		self.move(np.sqrt(2*kB_in_kcal_per_mole_per_kelvin*temperature*self.mobility*timestep) * random_vector)
 	def remove_interactions_by_id(self, ids):
 		for i in self.interactions:
 			if i.id in ids: i.remove()
