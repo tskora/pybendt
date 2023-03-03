@@ -6,16 +6,20 @@ from pybendt.reaction import Reaction
 
 class Atom():
 	id_iter = itertools.count()
-	def __init__(self, position, friction, label = ""):
+	def __init__(self, position, friction, label = "", dimensions = 3):
 		self.id = next(Atom.id_iter)+1
 		self.label = label
 		self.position = np.array(position)
+		self.dimensions = dimensions
+		assert len(self.position) == dimensions, 'Number of dimensions is set to {}, but you provided {}-component position vector'.format(dimensions, len(position))
 		self.interactions = []
 		self.reactions = []
-		self.force = np.zeros(3)
+		self.force = np.zeros(dimensions)
 		self.mobility = 1/friction
 	def __str__(self):
-		return '{}#{} {} {} {}'.format(self.label, self.id, *self.position)
+		position_string = self.dimensions*'{} '
+		position_string = position_string[:-1]
+		return ('{}#{} '+position_string).format(self.label, self.id, *self.position)
 	def __repr__(self):
 		return self.__str__()
 	def add_interaction(self, atom2, force_function, energy_function, parameters):
@@ -40,7 +44,7 @@ class Atom():
 		for r in self.reactions:
 			if r.id in ids: r.remove()
 	def reset_force(self):
-		self.force = np.zeros(3)
+		self.force = np.zeros(self.dimensions)
 
 def friction_from_hydrodynamic_radius_and_viscosity(hydradius, viscosity):
 	return 6 * np.pi * viscosity * hydradius * 6.02 / 41.84
