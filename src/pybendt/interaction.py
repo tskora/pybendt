@@ -22,7 +22,8 @@ class Interaction():
 	def remove(self):
 		self.atom1.interactions = [ i for i in self.atom1.interactions if i.id != self.id ]
 		self.atom2.interactions = [ i for i in self.atom2.interactions if i.id != self.id ]
-		del self
+		self.atom1 = None
+		self.atom2 = None
 	def __str__(self):
 		return '#{} {}-{} | force: {}, energy: {}, auxiliary parameters: {}'.format(self.id, self.atom1.id, self.atom2.id, self.force_function.__name__, self.energy_function.__name__, self.parameters)
 	def __repr__(self):
