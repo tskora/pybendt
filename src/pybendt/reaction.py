@@ -1,4 +1,6 @@
 import itertools
+import numpy as np
+from scipy.spatial.transform import Rotation
 
 class Reaction():
 	id_iter = itertools.count()
@@ -50,6 +52,36 @@ def distance_condition(distance, sign, reaction_distance):
 		return distance <= reaction_distance
 	else:
 		1/0
+
+def rmsd_condition(atoms, sign, reaction_rmsd, ref_atoms, dimension = 3):
+	if sign == ">":
+		return rmsd(atoms, ref_atoms, dimension) > reaction_rmsd
+	elif sign == "<":
+		return rmsd(atoms, ref_atoms, dimension) < reaction_rmsd
+	elif sign == ">=":
+		return rmsd(atoms, ref_atoms, dimension) >= reaction_rmsd
+	elif sign == "<=":
+		return rmsd(atoms, ref_atoms, dimension) <= reaction_rmsd
+	else:
+		1/0
+
+def rmsd(atoms, ref_atoms, dimension = 3):
+	assert len(atoms)==len(ref_atoms), 'Reference structure for RMSD should have the same number of atoms as the simulated one'
+	a = np.zeros((len(atoms), 3))
+	b = np.zeros((len(ref_atoms), 3))
+	for i in range(len(atoms)):
+		if dimension == 3:
+			a[i] = atoms[i].position
+			b[i] = ref_atoms[i].position
+		elif dimension == 2:
+			a[i][0], a[i][1] = atoms[i].position
+			b[i][0], b[i][1] = ref_atoms[i].position
+		else:
+			1/0
+	a_gc = np.mean(a, axis = 0)
+	b_gc = np.mean(b, axis = 0)
+	_, rmsd = Rotation.align_vectors(a-a_gc, b-b_gc)
+	return rmsd
 
 def add_interaction_effect(atom1, atom2, interaction):
 	print("interaction added")
