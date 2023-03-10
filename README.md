@@ -1,6 +1,8 @@
 # pybendt
 Brownian Elastic Networks with Dynamic Topology.
 
+![](https://github.com/pybendt/examples/2dist_criterion.gif)
+
 Copyright &copy;2023- Tomasz Skóra [tskora@sci.utah.edu](mailto:tskora@sci.utah.edu)
 
 > **Warning**
