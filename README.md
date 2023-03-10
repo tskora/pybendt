@@ -15,6 +15,7 @@ Copyright &copy;2023- Tomasz Skóra [tskora@sci.utah.edu](mailto:tskora@sci.utah
 - [x] customizable atom-atom (2-body) interactions
 - [ ] customizable many-body interactions
 - [x] customizable event-driven bond topology changes
+- [] input/output handling
 
 ## Quick start
 
