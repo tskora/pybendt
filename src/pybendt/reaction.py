@@ -2,6 +2,8 @@ import itertools
 import numpy as np
 from scipy.spatial.transform import Rotation
 
+from pybendt.interaction import kB_in_kcal_per_mole_per_kelvin
+
 class Reaction():
 	id_iter = itertools.count()
 	def __init__(self, atoms, reaction_conditions, effect_functions, effect_parameters, self_remove = True):
@@ -64,6 +66,32 @@ def rmsd_condition(atoms, sign, reaction_rmsd, ref_atoms, dimension = 3):
 		return rmsd(atoms, ref_atoms, dimension) <= reaction_rmsd
 	else:
 		1/0
+
+# RETHINK PASSING TWO CONDITION VARIABLES
+def metropolis_rmsd_condition(args, ref_atoms, exp_factor = 1, dimension = 3):
+	atoms, random_number = args
+	# print(atoms)
+	# print(random_number)
+	# print(ref_atoms)
+	rmsd_value = rmsd(atoms, ref_atoms, dimension)
+	# print(rmsd_value)
+	# print(np.exp(-exp_factor*rmsd_value))
+	# print()
+	return random_number < np.exp(-exp_factor*rmsd_value)
+
+# RETHINK PASSING THREE CONDITION VARIABLES
+def metropolis_energy_condition(args, temperature):
+	energy, ref_energy, random_number = args
+	print(energy)
+	print(ref_energy)
+	print(random_number)
+	print(np.exp((energy-ref_energy)/(kB_in_kcal_per_mole_per_kelvin*temperature)))
+	print()
+	# 1/0
+	return random_number < np.exp((energy-ref_energy)/(kB_in_kcal_per_mole_per_kelvin*temperature))
+
+def random_condition(random_number, probability):
+	return random_number < probability
 
 def rmsd(atoms, ref_atoms, dimension = 3):
 	assert len(atoms)==len(ref_atoms), 'Reference structure for RMSD should have the same number of atoms as the simulated one'

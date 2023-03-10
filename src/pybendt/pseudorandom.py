@@ -10,3 +10,6 @@ class Pseudorandom():
 	def draw(self):
 		self.draw_count += self.dimensions
 		return self.generator.standard_normal(self.dimensions)
+	def draw_single_uniform(self):
+		self.draw_count += 1
+		return self.generator.rand()
