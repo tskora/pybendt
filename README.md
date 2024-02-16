@@ -1,5 +1,5 @@
 # pybendt
-Brownian Elastic Networks with Dynamic Topology.
+Brownian Elastic Networks with Dynamic Topology
 
 ![](https://github.com/tskora/pybendt/blob/main/examples/2dist_criterion.gif?raw=true)
 
